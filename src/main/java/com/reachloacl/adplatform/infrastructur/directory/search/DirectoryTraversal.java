@@ -1,6 +1,9 @@
 package com.reachloacl.adplatform.infrastructur.directory.search;
 
 import java.io.File;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -8,15 +11,33 @@ import java.io.File;
  */
 public abstract class DirectoryTraversal {
 
-    protected DirectoryTraversalListener listener;
+    private List<DirectorySearchOutputProcessor> outputProcessors = Arrays.asList(new DirectoryAndFilePrinter(), new DirectoryFileAndSizePrinter());
+    protected DirectorySearchOutputProcessor listener;
+    private List<File> fileResultList;
 
     public void execute(String baseDirectory) {
+        initialize();
         File baseFile = new File(baseDirectory);
-        listener = new DirectoryFileAndSizePrinter();
-        listener.initialize();
         traverse(baseFile);
-        listener.printFiles();
+        processResult();
+    }
+
+    private void initialize() {
+        fileResultList = new LinkedList<File>();
+        listener = new DirectoryFileAndSizePrinter();
     }
 
     protected abstract void traverse(File file);
+
+    protected void proceedWithFile(File file) {
+        fileResultList.add(file);
+
+    }
+
+    private void processResult() {
+        for (DirectorySearchOutputProcessor outputProcessor : outputProcessors) {
+            outputProcessor.printFiles(fileResultList);
+        }
+    }
+
 }

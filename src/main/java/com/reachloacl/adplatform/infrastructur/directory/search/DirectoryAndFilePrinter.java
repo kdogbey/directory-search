@@ -1,31 +1,22 @@
 
-
 package com.reachloacl.adplatform.infrastructur.directory.search;
 
 import java.io.File;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
  *
  * @author philip.dogbey
  */
-public class DirectoryAndFilePrinter implements DirectoryTraversalListener{
-    private List<File> fileList;
+public class DirectoryAndFilePrinter implements DirectorySearchOutputProcessor{
     @Override
-    public void proceedWithFile(File file) {
-        fileList.add(file);
-    }
-
-    @Override
-    public void printFiles() {
+    
+    public void printFiles(List<File> fileList) {
+        System.out.println("\nPrinting Directory and  File Name");
         for(File file : fileList) {
             System.out.println("Directory: " + file.getParent() + ", File: "+ file.getName() );
         }
     }
 
-    @Override
-    public void initialize() {
-       fileList = new LinkedList<File>();
-    }
+   
 }

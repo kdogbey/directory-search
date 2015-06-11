@@ -4,30 +4,11 @@ import java.io.File;
 
 public class BreadthFirstDirectoryTraversal extends DirectoryTraversal {
     private DirectoryList list;
-   /*  public BreadthFirstDirectoryTraversal(String basePath) {
-        this();
-        this.basePth = basePath;
-        directoryTraversalListener = new DirectoryFileAndSizePrinter();
-    }
-*/
-    
-   /* @Override
-    public void execute() {
-        directoryTraversalListener.initialize();
-        File file = new File(basePth);
-        traverse(file);
-        directoryTraversalListener.printFiles();
-    }
-*/
+ 
     public BreadthFirstDirectoryTraversal() {
         list = new DirectoryList();
     }
 
-    /**
-     * Traverses the directory tree in level order (breadth first)
-     *
-     * @param file
-     */
     public void traverse(File file) {
         list.add(file);
         while (!list.empty()) {
@@ -40,7 +21,7 @@ public class BreadthFirstDirectoryTraversal extends DirectoryTraversal {
                     }
                 }
             } else {
-                listener.proceedWithFile(file);
+                proceedWithFile(file);
             }
         }
     }
