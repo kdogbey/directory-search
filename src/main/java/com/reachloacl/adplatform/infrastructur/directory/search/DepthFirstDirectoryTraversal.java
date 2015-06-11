@@ -24,7 +24,7 @@ public class DepthFirstDirectoryTraversal extends DirectoryTraversal {
                 depthFirsFileSearch(f);
             }
         } else {
-            listener.proceedWithFile(file);
+           proceedWithFile(file);
         }
     }
 }
